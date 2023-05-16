@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+<!--      /*post 방식으로 넘겨줌*/-->
+  <form action="/members/new" method="post">
+    <div class="form-group">
+      <label for="name">이름</label>
+<!--        # name 속성은 서버로 넘어갈 때 키 역할을 해줌 # -->
+      <input type="text" id="name" name="name" placeholder="이름을 입력하세요.">
+    </div>
+    <button type="submit">등록</button>
+
+  </form>
+</div>
+</body>
+</html>
