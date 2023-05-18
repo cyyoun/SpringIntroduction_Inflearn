@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,10 +22,11 @@ class MemberServiceIntegrationTest {
 
 
     @Test
+    @Commit
     void 회원가입() {
         //given
         Member member = new Member();
-        member.setName("cyyoun3");
+        member.setName("cyyoun1");
 
         //when
         long saveId = memberService.join(member);
@@ -38,6 +40,7 @@ class MemberServiceIntegrationTest {
 
 
     @Test
+    @Commit
     public void 중복_회원_예외() {
         //given
         Member member1 = new Member();
@@ -52,7 +55,6 @@ class MemberServiceIntegrationTest {
 
          try {
                     memberService.join(member2);
-                    fail();
                 } catch (IllegalStateException e) {
                     assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다..╰（‵□′）╯");
 
