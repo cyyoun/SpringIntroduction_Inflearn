@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
 @Transactional //DB에 있는 테스트 데이터를 롤백해줌 -> db에 테스트 한 데이터가 반영이 안되므로 반복해서 테스트 실행할 수 있음
@@ -45,10 +46,17 @@ class MemberServiceIntegrationTest {
         Member member2 = new Member();
         member2.setName("jdcha2");
 
-        IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+//        IllegalStateException e = Assertions.assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 
-        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다..╰（‵□′）╯");
+//        assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다..╰（‵□′）╯");
 
+         try {
+                    memberService.join(member2);
+                    fail();
+                } catch (IllegalStateException e) {
+                    assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다..╰（‵□′）╯");
+
+                }
 
     }
 
